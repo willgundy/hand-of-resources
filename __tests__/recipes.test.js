@@ -30,7 +30,6 @@ describe('backend-express-template routes', () => {
       .post("/recipes")
       .send({ title: 'Avocado Toast', description: 'Open faced sandwich with mashed avocado over toast', prepTime: 2, cookTime: 3, totalTime: 5, servings: 1 });
     expect(resp.status).toBe(200);
-    console.log(resp);
     expect(resp.body.title).toEqual('Avocado Toast');
     expect(resp.body.prepTime).toEqual(2);
     expect(resp.body.cookTime).toEqual(3);
@@ -38,6 +37,17 @@ describe('backend-express-template routes', () => {
     const newRecipe = await request(app).get(`/recipes/${resp.body.id}`);
     expect(newRecipe.body.title).toEqual('Avocado Toast');
     expect(newRecipe.body.totalTime).toEqual(5);
+  });
+
+  it('PUT /recipes/:id should update recipe info', async () => {
+    const resp = await request(app)
+      .put('/recipes/1')
+      .send({ title: 'Peanut Butter and Jelly Sandwich' });
+    expect(resp.status).toEqual(200);
+    expect(resp.body.title).toEqual('Peanut Butter and Jelly Sandwich');
+    const res = await request(app).get('/recipes/1');
+    expect(res.body.title).toEqual('Peanut Butter and Jelly Sandwich');
+    expect(res.body.prepTime).toEqual(1);
   });
 
   afterAll(() => {
