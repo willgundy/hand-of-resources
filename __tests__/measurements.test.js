@@ -45,6 +45,26 @@ describe('backend-express-template routes', () => {
     expect(res.body.description).toEqual('oz');
   });
 
+  it('DELETE /measurements/:id should delete the measurement by id', async () => {
+    const resp = await request(app)
+    .post("/measurements")
+    .send({ description: 'test' });
+    expect(resp.status).toBe(200);
+    expect(resp.body.description).toEqual('test');
+    const res = await request(app).get('/measurements');
+    expect(res.body.length).toEqual(7);
+
+    const newMeasurement = await request(app).get(`/measurements/${resp.body.id}`);
+    expect(newMeasurement.body.description).toEqual('test');
+
+    const respDelete = await request(app).delete(`/measurements/${resp.body.id}`)
+    expect(respDelete.status).toEqual(200);
+    expect(respDelete.body.description).toEqual('test');
+    
+    const resTwo = await request(app).get('/measurements');
+    expect(resTwo.body.length).toEqual(6);
+  });
+
   afterAll(() => {
     pool.end();
   });
