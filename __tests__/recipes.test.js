@@ -50,7 +50,7 @@ describe('backend-express-template routes', () => {
     expect(res.body.prepTime).toEqual(1);
   });
 
-  it('DELETE /recipes/:id should delete a recipe', async () => {
+  it.skip('DELETE /recipes/:id should delete a recipe', async () => {
     const resp = await request(app).delete('/recipes/1');
     expect(resp.status).toEqual(200);
 
