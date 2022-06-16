@@ -50,13 +50,13 @@ describe('backend-express-template routes', () => {
     expect(res.body.prepTime).toEqual(1);
   });
 
-  it.skip('DELETE /recipes/:id should delete a recipe', async () => {
-    const resp = await request(app).delete('/recipes/1');
-    expect(resp.status).toEqual(200);
+  // it.skip('DELETE /recipes/:id should delete a recipe', async () => {
+  //   const resp = await request(app).delete('/recipes/1');
+  //   expect(resp.status).toEqual(200);
 
-    const deletedRecipe = await request(app).get('/recipes/1');
-    expect(deletedRecipe.body).toEqual('');
-  });
+  //   const deletedRecipe = await request(app).get('/recipes/1');
+  //   expect(deletedRecipe.body).toEqual('');
+  // });
 
   afterAll(() => {
     pool.end();
