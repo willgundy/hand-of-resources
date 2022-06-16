@@ -12,18 +12,18 @@ CREATE TABLE recipes (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     title VARCHAR NOT NULL,
     description VARCHAR,
-    prepTime INT,
-    cookTime INT,
-    totalTime INT,
+    "prepTime" INT,
+    "cookTime" INT,
+    "totalTime" INT,
     servings INT
 );
 
 CREATE TABLE instructions (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    recipeId BIGINT NOT NULL,
-    stepNumber INT NOT NULL,
+    "recipeId" BIGINT NOT NULL,
+    "stepNumber" INT NOT NULL,
     description VARCHAR NOT NULL,
-    FOREIGN KEY (recipeId) REFERENCES recipes(id)
+    FOREIGN KEY ("recipeId") REFERENCES recipes(id)
 );
 
 CREATE TABLE measurements (
@@ -39,21 +39,21 @@ CREATE TABLE groceries (
 
 CREATE TABLE ingredients (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    recipeId BIGINT NOT NULL,
+    "recipeId" BIGINT NOT NULL,
     amount INT NOT NULL,
-    measurementId BIGINT NOT NULL,
-    groceryId BIGINT NOT NULL,
-    FOREIGN KEY (recipeId) REFERENCES recipes(id),
-    FOREIGN KEY (measurementId) REFERENCES measurements(id),
-    FOREIGN KEY (groceryId) REFERENCES groceries(id)
+    "measurementId" BIGINT NOT NULL,
+    "groceryId" BIGINT NOT NULL,
+    FOREIGN KEY ("recipeId") REFERENCES recipes(id),
+    FOREIGN KEY ("measurementId") REFERENCES measurements(id),
+    FOREIGN KEY ("groceryId") REFERENCES groceries(id)
 );
 
-INSERT INTO recipes (title, description, prepTime, cookTime, totalTime, servings)
+INSERT INTO recipes (title, description, "prepTime", "cookTime", "totalTime", servings)
 VALUES
   ('PB&J', 'The classic peanut butter and jelly sammy', 1, 2, 3, 1),
   ('Stir Fry Noodles', 'Chicken stir fry noodles with vegetables in a quick and easy stir fry sauce.', 15, 15, 30, 4);
 
-INSERT INTO instructions (recipeId, stepNumber, description)
+INSERT INTO instructions ("recipeId", "stepNumber", description)
 VALUES
   (1, 1, 'Pull out ingredients (Peanut Butter, Jelly, Bread) and a knife to spread ingredients onto bread'),
   (1, 2, 'Spread peanut butter onto one slice of bread'),
@@ -89,7 +89,7 @@ VALUES
   ('hot sauce', 'sriracha');
 
 
-INSERT INTO ingredients (recipeId, amount, measurementId, groceryId)
+INSERT INTO ingredients ("recipeId", amount, "measurementId", "groceryId")
 VALUES
   (1, 2, 3, 1), --peanut butter
   (1, 2, 3, 2), --jelly
