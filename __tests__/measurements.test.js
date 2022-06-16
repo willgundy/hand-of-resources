@@ -35,6 +35,16 @@ describe('backend-express-template routes', () => {
     expect(newMeasurement.body.description).toEqual('carton');
   });
 
+  it('PUT /measurements/:id should update measurement description', async () => {
+    const resp = await request(app)
+      .put('/measurements/3')
+      .send({ description: 'oz' });
+    expect(resp.status).toEqual(200);
+    expect(resp.body.description).toEqual('oz');
+    const res = await request(app).get('/measurements/3');
+    expect(res.body.description).toEqual('oz');
+  });
+
   afterAll(() => {
     pool.end();
   });
