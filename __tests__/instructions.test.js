@@ -38,6 +38,17 @@ describe('instruction routes', () => {
     expect(newInstruction.body.description).toEqual('Enjoy!');
   });
 
+  it('PUT /instructions/:id should update instruction info', async () => {
+    const resp = await request(app)
+      .put('/instructions/1')
+      .send({ description: 'Get Ingredients' });
+    expect(resp.status).toEqual(200);
+    expect(resp.body.description).toEqual('Get Ingredients');
+    expect(resp.body.stepNumber).toEqual(1);
+    const res = await request(app).get('/instructions/1');
+    expect(res.body.description).toEqual('Get Ingredients');
+    expect(res.body.stepNumber).toEqual(1);
+  });
 
   afterAll(() => {
     pool.end();
