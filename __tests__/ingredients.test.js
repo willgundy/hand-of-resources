@@ -53,6 +53,25 @@ describe('backend-express-template routes', () => {
     expect(res.body.measurementId).toEqual('4');
   });
   
+  it('DELETE /ingredients/:id should delete the ingredient by id', async () => {
+    const resp = await request(app)
+    .post("/ingredients")
+    .send({ recipeId: 2, amount: 2, measurementId: 3, groceryId: 4 });
+    expect(resp.status).toBe(200);
+    expect(resp.body.recipeId).toEqual('2');
+    const res = await request(app).get('/ingredients');
+    expect(res.body.length).toEqual(8);
+
+    const newIngredient = await request(app).get(`/ingredients/${resp.body.id}`);
+    expect(newIngredient.body.recipeId).toEqual('2');
+
+    const respDelete = await request(app).delete(`/ingredients/${resp.body.id}`)
+    expect(respDelete.status).toEqual(200);
+    expect(respDelete.body.recipeId).toEqual('2');
+    
+    const resTwo = await request(app).get('/ingredients');
+    expect(resTwo.body.length).toEqual(7);
+  });
 
   afterAll(() => {
     pool.end();
