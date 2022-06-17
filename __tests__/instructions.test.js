@@ -50,6 +50,29 @@ describe('instruction routes', () => {
     expect(res.body.stepNumber).toEqual(1);
   });
 
+  it('DELETE /instructions/:id should delete the instruction by id', async () => {
+    const resp = await request(app)
+    .post("/instructions")
+    .send({ recipeId: 1, stepNumber: 4, description: 'Enjoy!' });
+    expect(resp.status).toBe(200);
+    expect(resp.body.recipeId).toEqual('1');
+    const res = await request(app).get('/instructions');
+    expect(res.body.length).toEqual(10);
+
+    const newInstruction = await request(app).get(`/instructions/${resp.body.id}`);
+    expect(newInstruction.body.recipeId).toEqual('1');
+    expect(newInstruction.body.description).toEqual('Enjoy!');
+
+    const respDelete = await request(app).delete(`/instructions/${resp.body.id}`)
+    expect(respDelete.status).toEqual(200);
+    expect(respDelete.body.recipeId).toEqual('1');
+    expect(respDelete.body.description).toEqual('Enjoy!');
+
+    
+    const resTwo = await request(app).get('/instructions');
+    expect(resTwo.body.length).toEqual(9);
+  });
+
   afterAll(() => {
     pool.end();
   });
