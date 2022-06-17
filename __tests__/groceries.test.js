@@ -38,6 +38,16 @@ describe('backend-express-template routes', () => {
     expect(newGrocery.body.brand).toEqual('prego');
   });
 
+  it('PUT /groceries/:id should update grocery information', async () => {
+    const resp = await request(app)
+      .put('/groceries/3')
+      .send({ brand: 'wonder' });
+    expect(resp.status).toEqual(200);
+    expect(resp.body.brand).toEqual('wonder');
+    const res = await request(app).get('/groceries/3');
+    expect(res.body.brand).toEqual('wonder');
+  });
+
   afterAll(() => {
     pool.end();
   });
