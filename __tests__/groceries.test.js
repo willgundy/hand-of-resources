@@ -48,6 +48,26 @@ describe('backend-express-template routes', () => {
     expect(res.body.brand).toEqual('wonder');
   });
 
+  it('DELETE /groceries/:id should delete the grocery by id', async () => {
+    const resp = await request(app)
+    .post("/groceries")
+    .send({ description: 'test', brand: 'test' });
+    expect(resp.status).toBe(200);
+    expect(resp.body.description).toEqual('test');
+    const res = await request(app).get('/groceries');
+    expect(res.body.length).toEqual(12);
+
+    const newMeasurement = await request(app).get(`/groceries/${resp.body.id}`);
+    expect(newMeasurement.body.description).toEqual('test');
+
+    const respDelete = await request(app).delete(`/groceries/${resp.body.id}`)
+    expect(respDelete.status).toEqual(200);
+    expect(respDelete.body.description).toEqual('test');
+    
+    const resTwo = await request(app).get('/groceries');
+    expect(resTwo.body.length).toEqual(11);
+  });
+
   afterAll(() => {
     pool.end();
   });
