@@ -24,6 +24,20 @@ describe('backend-express-template routes', () => {
     expect(res.body.brand).toEqual('smuckers');
   });
 
+  it("POST /grocery should create a new grocery item to use in a recipe", async () => {
+    const resp = await request(app)
+      .post("/groceries")
+      .send({ description: 'pasta sauce', brand: 'prego'  });
+    expect(resp.status).toBe(200);
+    expect(resp.body.description).toEqual('pasta sauce');
+    const res = await request(app).get('/groceries');
+    expect(res.body.length).toEqual(12);
+
+    const newGrocery = await request(app).get(`/groceries/${resp.body.id}`);
+    expect(newGrocery.body.description).toEqual('pasta sauce');
+    expect(newGrocery.body.brand).toEqual('prego');
+  });
+
   afterAll(() => {
     pool.end();
   });
