@@ -17,6 +17,13 @@ describe('instruction routes', () => {
     expect(spread.description).toEqual('Spread peanut butter onto one slice of bread');
   });
 
+  it('should return a single instruction', async () => {
+    const res = await request(app).get('/instructions/2');
+    expect(res.status).toBe(200);
+    expect(res.body.description).toEqual('Spread peanut butter onto one slice of bread');
+    expect(res.body.stepNumber).toEqual(2);
+  });
+
 
   afterAll(() => {
     pool.end();
