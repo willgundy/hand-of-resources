@@ -40,6 +40,18 @@ describe('backend-express-template routes', () => {
     expect(newIngredient.body.measurementId).toEqual('3');
     expect(newIngredient.body.groceryId).toEqual('4');
   });
+
+  it('PUT /ingredients/:id should update ingredient info', async () => {
+    const resp = await request(app)
+      .put('/ingredients/1')
+      .send({ amount: 4, measurementId: 4 });
+    expect(resp.status).toEqual(200);
+    expect(resp.body.amount).toEqual(4);
+    expect(resp.body.measurementId).toEqual('4');
+    const res = await request(app).get('/ingredients/1');
+    expect(res.body.amount).toEqual(4);
+    expect(res.body.measurementId).toEqual('4');
+  });
   
 
   afterAll(() => {
