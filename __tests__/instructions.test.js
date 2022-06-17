@@ -24,6 +24,20 @@ describe('instruction routes', () => {
     expect(res.body.stepNumber).toEqual(2);
   });
 
+  it("POST /instructions should create a new recipe", async () => {
+    const resp = await request(app)
+      .post("/instructions")
+      .send({ recipeId: 1, stepNumber: 4, description: 'Enjoy!' });
+    expect(resp.status).toBe(200);
+    expect(resp.body.recipeId).toEqual('1');
+    expect(resp.body.stepNumber).toEqual(4);
+    expect(resp.body.description).toEqual('Enjoy!');
+  
+    const newInstruction = await request(app).get(`/instructions/${resp.body.id}`);
+    expect(newInstruction.body.recipeId).toEqual('1');
+    expect(newInstruction.body.description).toEqual('Enjoy!');
+  });
+
 
   afterAll(() => {
     pool.end();
