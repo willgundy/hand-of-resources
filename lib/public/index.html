@@ -8,6 +8,329 @@
     <title>Hand Of Resources</title>
 </head>
 <body>
-    
-</body>
+    <main class="p-4 w-1/2 m-auto">
+      <header id="header">
+        <h1 class="text-lg">Recipe API</h1>
+        <p class="text-xs">Create Read Update and Delete recipes</p>
+      </header>
+      <h2 class="text-lg text-center font-bold mt-4">Recipes</h2>
+      <table class="table border-2 mt-4">
+        <thead class="table-header-group border-2">
+          <tr>
+            <th class="table-cell p-3">Route</th>
+            <th class="table-cell p-3">Method</th>
+            <th class="table-cell p-3 w-40">Description</th>
+            <th class="table-cell p-3">Example</th>
+          </tr>
+        </thead>
+        <tbody class="table-row-group">
+          <tr class="border-2">
+            <td class="table-cell p-3"><pre>/recipes</pre></td>
+            <td class="table-cell p-3 text-center">GET</td>
+            <td class="table-cell p-3">
+              Gets a list of all recipes stored in the API
+            </td>
+            <td class="table-cell p-3">
+              <a href="/recipes" target="_blank" class="text-blue-700"
+                >List Recipes</a
+              >
+            </td>
+          </tr>
+          <tr class="border-2">
+            <td class="table-cell p-3"><pre>/recipes/1</pre></td>
+            <td class="table-cell p-3 text-center">GET</td>
+            <td class="table-cell p-3">
+              Returns a single single recipe with instructions and ingredients
+            </td>
+            <td class="table-cell p-3">
+              <a href="/recipes/1" target="_blank" class="text-blue-700"
+                >Get Single Recipe</a
+              >
+            </td>
+          </tr>
+          <tr class="border-2">
+            <td class="table-cell p-3"><pre>/recipes</pre></td>
+            <td class="table-cell p-3 text-center">POST</td>
+            <td class="table-cell p-3">Adds a new recipe for the user</td>
+            <td class="table-cell p-3">
+                <!-- need to add url here -->
+              <pre class="code">curl -d '{ title: 'Avocado Toast', description: 'Open faced sandwich with mashed avocado over toast', prepTime: 2, cookTime: 3, totalTime: 5, servings: 1 }' -H 'Content-Type: application/json' ''</pre>
+            </td>
+          </tr>
+          <tr class="border-2">
+            <td class="table-cell p-3"><pre>/recipes/1</pre></td>
+            <td class="table-cell p-3 text-center">PUT</td>
+            <td class="table-cell p-3">Updates recipe information</td>
+            <td class="table-cell p-3">
+                <!-- need to add curl route for update -->
+            </td>
+          </tr>
+          <tr class="border-2">
+            <td class="table-cell p-3"><pre>/recipes/1</pre></td>
+            <td class="table-cell p-3 text-center">DELETE</td>
+            <td class="table-cell p-3">Deletes a recipe from the Database</td>
+            <td class="table-cell p-3">
+                <!-- need to add curl route for delete -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Instruction Section -->
+      <h2 class="text-lg text-center font-bold mt-4">Instructions</h2>
+      <table class="table border-2 mt-4">
+        <thead class="table-header-group border-2">
+          <tr>
+            <th class="table-cell p-3">Route</th>
+            <th class="table-cell p-3">Method</th>
+            <th class="table-cell p-3 w-40">Description</th>
+            <th class="table-cell p-3">Example</th>
+          </tr>
+        </thead>
+        <tbody class="table-row-group">
+          <tr class="border-2">
+            <td class="table-cell p-3"><pre>/instructions</pre></td>
+            <td class="table-cell p-3 text-center">GET</td>
+            <td class="table-cell p-3">
+              Gets a list of all instructions stored in the API
+            </td>
+            <td class="table-cell p-3">
+              <a href="/instructions" target="_blank" class="text-blue-700"
+                >List Instructions</a
+              >
+            </td>
+          </tr>
+          <tr class="border-2">
+            <td class="table-cell p-3"><pre>/instructions/1</pre></td>
+            <td class="table-cell p-3 text-center">GET</td>
+            <td class="table-cell p-3">
+              Returns a single instruction as well as the recipe it belongs to
+            </td>
+            <td class="table-cell p-3">
+              <a href="/instructions/1" target="_blank" class="text-blue-700"
+                >Get Single Instruction</a
+              >
+            </td>
+          </tr>
+          <tr class="border-2">
+            <td class="table-cell p-3"><pre>/instructions</pre></td>
+            <td class="table-cell p-3 text-center">POST</td>
+            <td class="table-cell p-3">Adds a new instruction for the user</td>
+            <td class="table-cell p-3">
+                <!-- need to add url here -->
+              <pre class="code">curl -d '{ recipeId: 1, stepNumber: 4, description: 'Enjoy!' }' -H 'Content-Type: application/json' ''</pre>
+            </td>
+          </tr>
+          <tr class="border-2">
+            <td class="table-cell p-3"><pre>/instructions/1</pre></td>
+            <td class="table-cell p-3 text-center">PUT</td>
+            <td class="table-cell p-3">Updates instruction information</td>
+            <td class="table-cell p-3">
+                <!-- need to add curl route for update -->
+            </td>
+          </tr>
+          <tr class="border-2">
+            <td class="table-cell p-3"><pre>/instructions/1</pre></td>
+            <td class="table-cell p-3 text-center">DELETE</td>
+            <td class="table-cell p-3">Deletes an instruction from the Database</td>
+            <td class="table-cell p-3">
+                <!-- need to add curl route for delete -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Ingredient Section -->
+      <h2 class="text-lg text-center font-bold mt-4">Ingredients</h2>
+      <table class="table border-2 mt-4">
+        <thead class="table-header-group border-2">
+          <tr>
+            <th class="table-cell p-3">Route</th>
+            <th class="table-cell p-3">Method</th>
+            <th class="table-cell p-3 w-40">Description</th>
+            <th class="table-cell p-3">Example</th>
+          </tr>
+        </thead>
+        <tbody class="table-row-group">
+          <tr class="border-2">
+            <td class="table-cell p-3"><pre>/ingredients</pre></td>
+            <td class="table-cell p-3 text-center">GET</td>
+            <td class="table-cell p-3">
+              Gets a list of all ingredients stored in the API
+            </td>
+            <td class="table-cell p-3">
+              <a href="/ingredients" target="_blank" class="text-blue-700"
+                >List Ingredients</a
+              >
+            </td>
+          </tr>
+          <tr class="border-2">
+            <td class="table-cell p-3"><pre>/ingredients/1</pre></td>
+            <td class="table-cell p-3 text-center">GET</td>
+            <td class="table-cell p-3">
+              Returns a single ingredient as well as the recipe it belongs to
+            </td>
+            <td class="table-cell p-3">
+              <a href="/ingredients/1" target="_blank" class="text-blue-700"
+                >Get Single ingredient</a
+              >
+            </td>
+          </tr>
+          <tr class="border-2">
+            <td class="table-cell p-3"><pre>/ingredients</pre></td>
+            <td class="table-cell p-3 text-center">POST</td>
+            <td class="table-cell p-3">Adds a new ingredient for the user</td>
+            <td class="table-cell p-3">
+                <!-- need to add url here -->
+              <pre class="code">curl -d '{ recipeId: 2, amount: 2, measurementId: 3, groceryId: 4 }' -H 'Content-Type: application/json' ''</pre>
+            </td>
+          </tr>
+          <tr class="border-2">
+            <td class="table-cell p-3"><pre>/ingredients/1</pre></td>
+            <td class="table-cell p-3 text-center">PUT</td>
+            <td class="table-cell p-3">Updates ingredient information</td>
+            <td class="table-cell p-3">
+                <!-- need to add curl route for update -->
+            </td>
+          </tr>
+          <tr class="border-2">
+            <td class="table-cell p-3"><pre>/ingredients/1</pre></td>
+            <td class="table-cell p-3 text-center">DELETE</td>
+            <td class="table-cell p-3">Deletes an ingredient from the Database</td>
+            <td class="table-cell p-3">
+                <!-- need to add curl route for delete -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- measurement Section -->
+      <h2 class="text-lg text-center font-bold mt-4">Measurements</h2>
+      <table class="table border-2 mt-4">
+        <thead class="table-header-group border-2">
+          <tr>
+            <th class="table-cell p-3">Route</th>
+            <th class="table-cell p-3">Method</th>
+            <th class="table-cell p-3 w-40">Description</th>
+            <th class="table-cell p-3">Example</th>
+          </tr>
+        </thead>
+        <tbody class="table-row-group">
+          <tr class="border-2">
+            <td class="table-cell p-3"><pre>/measurements</pre></td>
+            <td class="table-cell p-3 text-center">GET</td>
+            <td class="table-cell p-3">
+              Gets a list of all measurements stored in the API
+            </td>
+            <td class="table-cell p-3">
+              <a href="/measurements" target="_blank" class="text-blue-700"
+                >List Measurements</a
+              >
+            </td>
+          </tr>
+          <tr class="border-2">
+            <td class="table-cell p-3"><pre>/measurements/1</pre></td>
+            <td class="table-cell p-3 text-center">GET</td>
+            <td class="table-cell p-3">
+              Returns a single measurement as well as the recipe it belongs to
+            </td>
+            <td class="table-cell p-3">
+              <a href="/measurements/1" target="_blank" class="text-blue-700"
+                >Get Single Measurement</a
+              >
+            </td>
+          </tr>
+          <tr class="border-2">
+            <td class="table-cell p-3"><pre>/measurements</pre></td>
+            <td class="table-cell p-3 text-center">POST</td>
+            <td class="table-cell p-3">Adds a new measurement for the user</td>
+            <td class="table-cell p-3">
+                <!-- need to add url here -->
+              <pre class="code">curl -d '{ description: 'carton' }' -H 'Content-Type: application/json' ''</pre>
+            </td>
+          </tr>
+          <tr class="border-2">
+            <td class="table-cell p-3"><pre>/measurements/1</pre></td>
+            <td class="table-cell p-3 text-center">PUT</td>
+            <td class="table-cell p-3">Updates measurement information</td>
+            <td class="table-cell p-3">
+                <!-- need to add curl route for update -->
+            </td>
+          </tr>
+          <tr class="border-2">
+            <td class="table-cell p-3"><pre>/measurements/1</pre></td>
+            <td class="table-cell p-3 text-center">DELETE</td>
+            <td class="table-cell p-3">Deletes an measurement from the Database</td>
+            <td class="table-cell p-3">
+                <!-- need to add curl route for delete -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Groceries Section -->
+      <h2 class="text-lg text-center font-bold mt-4">Groceries</h2>
+      <table class="table border-2 mt-4">
+        <thead class="table-header-group border-2">
+          <tr>
+            <th class="table-cell p-3">Route</th>
+            <th class="table-cell p-3">Method</th>
+            <th class="table-cell p-3 w-40">Description</th>
+            <th class="table-cell p-3">Example</th>
+          </tr>
+        </thead>
+        <tbody class="table-row-group">
+          <tr class="border-2">
+            <td class="table-cell p-3"><pre>/groceries</pre></td>
+            <td class="table-cell p-3 text-center">GET</td>
+            <td class="table-cell p-3">
+              Gets a list of all groceries stored in the API
+            </td>
+            <td class="table-cell p-3">
+              <a href="/groceries" target="_blank" class="text-blue-700"
+                >List Groceries</a
+              >
+            </td>
+          </tr>
+          <tr class="border-2">
+            <td class="table-cell p-3"><pre>/groceries/1</pre></td>
+            <td class="table-cell p-3 text-center">GET</td>
+            <td class="table-cell p-3">
+              Returns a single grocery as well as the recipe it belongs to
+            </td>
+            <td class="table-cell p-3">
+              <a href="/groceries/1" target="_blank" class="text-blue-700"
+                >Get Single Grocery</a
+              >
+            </td>
+          </tr>
+          <tr class="border-2">
+            <td class="table-cell p-3"><pre>/groceries</pre></td>
+            <td class="table-cell p-3 text-center">POST</td>
+            <td class="table-cell p-3">Adds a new grocery for the user</td>
+            <td class="table-cell p-3">
+                <!-- need to add url here -->
+              <pre class="code">curl -d '{ description: 'pasta sauce', brand: 'prego' }' -H 'Content-Type: application/json' ''</pre>
+            </td>
+          </tr>
+          <tr class="border-2">
+            <td class="table-cell p-3"><pre>/groceries/1</pre></td>
+            <td class="table-cell p-3 text-center">PUT</td>
+            <td class="table-cell p-3">Updates grocery information</td>
+            <td class="table-cell p-3">
+                <!-- need to add curl route for update -->
+            </td>
+          </tr>
+          <tr class="border-2">
+            <td class="table-cell p-3"><pre>/groceries/1</pre></td>
+            <td class="table-cell p-3 text-center">DELETE</td>
+            <td class="table-cell p-3">Deletes an grocery from the Database</td>
+            <td class="table-cell p-3">
+                <!-- need to add curl route for delete -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+  </body>
 </html>

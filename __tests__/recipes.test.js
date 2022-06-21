@@ -50,13 +50,28 @@ describe('recipes routes', () => {
     expect(res.body.prepTime).toEqual(1);
   });
 
-  // it.skip('DELETE /recipes/:id should delete a recipe', async () => {
-  //   const resp = await request(app).delete('/recipes/1');
-  //   expect(resp.status).toEqual(200);
+  it('DELETE /recipes/:id should delete the recipe by id', async () => {
+    const resp = await request(app)
+    .post("/recipes")
+    .send({ title: 'Avocado Toast', description: 'Open faced sandwich with mashed avocado over toast', prepTime: 2, cookTime: 3, totalTime: 5, servings: 1 });
+    expect(resp.status).toBe(200);
+    expect(resp.body.title).toEqual('Avocado Toast');
+    const res = await request(app).get('/recipes');
+    expect(res.body.length).toEqual(3);
 
-  //   const deletedRecipe = await request(app).get('/recipes/1');
-  //   expect(deletedRecipe.body).toEqual('');
-  // });
+    const newRecipe = await request(app).get(`/recipes/${resp.body.id}`);
+    expect(newRecipe.body.title).toEqual('Avocado Toast');
+    expect(newRecipe.body.prepTime).toEqual(2);
+
+    const respDelete = await request(app).delete(`/recipes/${resp.body.id}`)
+    expect(respDelete.status).toEqual(200);
+    expect(respDelete.body.title).toEqual('Avocado Toast');
+    expect(respDelete.body.prepTime).toEqual(2);
+
+    
+    const resTwo = await request(app).get('/recipes');
+    expect(resTwo.body.length).toEqual(2);
+  });
 
   afterAll(() => {
     pool.end();
